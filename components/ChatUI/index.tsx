@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/en"; // or your preferred locale
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useEffect, useRef } from "react";
+import sharedStyles from "../../styles/shared/shared.module.scss";
 import { Message } from "../../types/shared";
 import { Database } from "../../types/supabase";
 import IsomorphicImage from "../IsomorphicImage";
@@ -60,7 +61,9 @@ const ChatUI = ({
 
   useEffect(() => {
     if (!chatLog.current) return;
-    chatLog.current.scrollTop = chatLog.current.scrollHeight;
+    (chatLog.current as HTMLUListElement).scrollTop = (
+      chatLog.current as HTMLUListElement
+    ).scrollHeight;
   }, [messageList]);
 
   return (
@@ -83,18 +86,20 @@ const ChatUI = ({
                 )}
               >
                 <div className={styles.message}>
-                  <div className={styles.avatar}>
+                  <div className={cx(sharedStyles.avatar, styles.avatar)}>
                     <IsomorphicImage
                       src={message.users.avatar_image}
-                      alt={message.users.username}
+                      alt={message.users.name}
                       width={48}
                       height={48}
                     />
                   </div>
-                  <div className={styles.username}>
-                    {message.users.username}
+                  <div className={styles.messageText}>
+                    <span className={styles.username}>
+                      {message.users.name}
+                    </span>
+                    {message.message_text}
                   </div>
-                  {message.message_text}
                 </div>
                 <span className={styles.timestamp}>{timestamp}</span>
               </li>

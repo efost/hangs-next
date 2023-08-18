@@ -1,6 +1,7 @@
 import ChatUI from "@/components/ChatUI";
 import EventMap from "@/components/EventMap";
 import HeroSection from "@/components/HeroSection";
+import RSVPList from "@/components/RSVPList";
 import { Event, Message } from "@/types/shared";
 import { createClient } from "@supabase/supabase-js";
 import { NextPageContext } from "next";
@@ -24,7 +25,7 @@ export async function getServerSideProps(context: NextPageContext) {
     .select(
       `
       user_id,
-      users: user (id, username, avatar_image)
+      users: user (id, name, avatar_image)
     `
     )
     .eq("chat_room_id", id);
@@ -65,7 +66,7 @@ const EventPage = ({
           user_id,
           message_text,
           created_at,
-          users (id, username, avatar_image)
+          users (id, name, avatar_image)
         `
           )
           .eq("chat_room_id", event?.id);
@@ -101,7 +102,7 @@ const EventPage = ({
                 user_id,
                 message_text,
                 created_at,
-                users (id, username, avatar_image)
+                users (id, name, avatar_image)
               `
             )
             .eq("id", payload.new.id)
@@ -127,13 +128,16 @@ const EventPage = ({
 
   return (
     <div className="bodyWrapper">
-      <HeroSection event={event} eventDescription={eventDescription} />
-      <div style={{ display: "flex" }}>
+      <div className="column">
+        <HeroSection event={event} eventDescription={eventDescription} />
         <ChatUI
           messageList={messageList}
           eventId={event.id}
           onDescriptionChange={setEventDescription}
         />
+      </div>
+      <div className="column">
+        <RSVPList />
         <EventMap />
       </div>
     </div>

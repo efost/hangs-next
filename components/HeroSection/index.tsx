@@ -1,4 +1,6 @@
 import { Event } from "@/types/shared";
+import { IconCalendarPlus, IconTicket } from "@tabler/icons-react";
+import cx from "classnames";
 import styles from "./HeroSection.module.scss";
 
 interface Props {
@@ -12,27 +14,35 @@ const HeroSection = (props: Props) => {
   return (
     <>
       <div className={styles.heroContainer}>
-        <div className={styles.eventInfo}>
-          <h1>{event.name}</h1>
-          <p className={styles.date}>
-            {/* <Icon
-              icon={faCalendarAlt}
-              style={{
-                color: "var(--color-primary)",
-                marginRight: "0.5rem",
-                fontSize: "0.8em",
-              }}
-            /> */}
-            {new Date(event.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </p>
-          <p>{eventDescription}</p>
+        <div className={styles.column}>
+          <div className={styles.eventInfo}>
+            <h1>{event.name}</h1>
+            <p className={styles.date}>
+              {new Date(event.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </p>
+          </div>
+        </div>
+        <div className={styles.column}>
+          <button className={cx(styles.button, styles.rsvpButton)}>
+            <div className={styles.buttonIcon}>
+              <IconCalendarPlus size={16} />
+            </div>
+            RSVP
+          </button>
+          <button className={cx(styles.button, styles.ticketsButton)}>
+            <div className={styles.buttonIcon}>
+              <IconTicket size={16} />
+            </div>
+            Tickets
+          </button>
         </div>
         {/* <HeroImage image={event.image} /> */}
       </div>
+      <p>{eventDescription}</p>
     </>
   );
 };

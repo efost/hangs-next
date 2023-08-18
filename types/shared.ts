@@ -5,7 +5,7 @@ export interface Message {
   created_at: string | null;
   users: {
     id: number;
-    username: string;
+    name: string;
     avatar_image: string;
   };
 }

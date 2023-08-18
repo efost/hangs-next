@@ -9,7 +9,9 @@
   right: 0;
   h1 {
     color: var(--color-primary);
-    margin-block-end: 0;
+    line-height: 1;
+    margin-block-start: 0;
+    margin-block-end: 0.25rem;
     // border-bottom: 1px solid #dbdfe6;
   }
   p {
@@ -19,7 +21,6 @@
       display: flex;
       align-items: baseline;
       color: var(--color-secondary);
-      margin-block-end: 1em;
       font-weight: bold;
       font-size: 1.2em;
     }
@@ -29,4 +30,59 @@
 .heroContainer {
   position: relative;
   overflow: hidden;
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex: 0;
+  white-space: nowrap;
+  &:not(:first-child) {
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-right: 3em;
+  }
+}
+
+.button {
+  display: flex;
+}
+
+.buttonIcon {
+  margin-right: 0.5em;
+  position: relative;
+  top: 2px;
+}
+
+.ticketsButton {
+  svg {
+    transform: rotate(-45deg);
+  }
+  path {
+    transition: fill 0.2s ease-in-out;
+  }
+  &:hover {
+    // border-color:  #ffda00;
+    // box-shadow: 0 0 4px #ffda00;
+    // background: linear-gradient(0deg, #fff9d7, transparent);
+    path {
+      fill: #ffda00;
+    }
+  }
+}
+
+.rsvpButton {
+  margin-right: 1em;
+  path {
+    transition: fill 0.2s ease-in-out;
+  }
+  &:hover {
+    // background: linear-gradient(0deg, rgb(234, 255, 254), transparent);
+    // border-color: rgb(0, 227, 212);
+    // box-shadow: 0 0 4px rgb(0, 227, 212);
+    path {
+      fill:rgb(0, 227, 212);
+    }
+  }
 }
